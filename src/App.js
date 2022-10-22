@@ -42,9 +42,9 @@ function App() {
   }
 
   function deleteTodo() {
-    const newTodos =todos.filter(todo=> !todo.complete)
-    setTodos(newTodos)
-    }
+    const newTodos = todos.filter((todo) => !todo.complete);
+    setTodos(newTodos);
+  }
   return (
     <>
       <TodoList todos={todos} toggleTodo={toggleTodo} />
@@ -60,7 +60,9 @@ function App() {
         onClick={deleteTodo}
       />
       <br />
-      <div> you have {todos.length} to do left</div>
+      {(todos < 1 && <div> you have 0 tasks left,good job</div>) || (
+        <div> you have {todos.length} todos left</div>
+      )}
     </>
   );
 }
