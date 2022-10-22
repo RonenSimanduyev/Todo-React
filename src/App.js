@@ -9,18 +9,18 @@ function App() {
   const [todos, setTodos] = useState([]);
   const todoNameRef = useRef();
 
-  // update the data in each render with setTodo
+  // get the data from the localstorage
   useEffect(() => {
     const stored_Todo = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
     if (stored_Todo) setTodos(stored_Todo);
   }, []);
 
-  // setting localstorage ,key make the data a string with evry render
+  // updating the localstorage date everytime the state todos changes
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
 
-  // add todo to the state
+  // add todo to the list
   function handleAddTodo(e) {
     // defining the name with useRef
     const name = todoNameRef.current.value;
@@ -35,7 +35,9 @@ function App() {
   }
 
   function toggleTodo(id) {
+    // creaet new variable
     const newTodos = [...todos];
+    // find the todo that hos copmlete status has changed
     const todo = newTodos.find((todo) => todo.id === id);
     todo.complete = !todo.complete;
     setTodos(newTodos);
